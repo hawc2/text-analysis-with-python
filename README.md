@@ -35,7 +35,7 @@ Vector space modeling, also known as word embedding models, is a more recent inn
 
 For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). 
 
-# Sample Datasets
+## Sample Datasets
 
 For the purposes of the workshop, we won't be using large datasets, simply to save time. If you are looking for million word datasets to use for word embeddings, there are many places to find them, including Google Dataset Search, and Kaggle's datasets. 
 
