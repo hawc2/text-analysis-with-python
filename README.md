@@ -33,7 +33,7 @@ For this workshop, we'll be using a topic modeling algorithm, Latent Dirichlet A
 
 Vector space modeling, also known as word embedding models, is a more recent innovation in text mining, first inaugurated by Google releasing their algorithm, Word2Vec. Unlike topic modeling, [vector space modeling](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html) allows you to explore the relationships between words in the same corpus. 
 
-For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). 
+For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). For navigating the Tensorflow projector, this [cheatsheet](https://github.com/louishenrifranc/Tensorflow-Cheatsheet) is helpful.
 
 ## Sample Datasets
 
