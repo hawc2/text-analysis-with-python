@@ -16,7 +16,7 @@ To see examples of Google colab notebooks and what they can do, check out [Aweso
 
 ## Text Mining with Python
 
-In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. 
+For a user-friendly tool to explore the basics of text mining, check out [Voyant](https://voyant-tools.org/). In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. 
 
 The [Natural Language Toolkit](https://www.nltk.org) has been a reliable library for the basics of text mining. The [NLTK Book guides](https://www.nltk.org/book/) you through the fundamental functions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has been created using Jupyter Notebooks.
 
@@ -24,12 +24,15 @@ In this workshop, we'll be using [Textblob](https://textblob.readthedocs.io/en/d
 
 ### Topic Modeling
 
-Topic modeling is one of the most commonly used forms of computational text analysis. 
+[Topic modeling](http://journalofdigitalhumanities.org/2-1/topic-modeling-a-basic-introduction-by-megan-r-brett/) is one of the most commonly used forms of computational text analysis, allowing you to identify a series of topics distributed across a series of documents. There are many ways to do topic modeling, including multiple different algorithms, and a GUI-based tool by [Scott Enderle](https://github.com/senderle/topic-modeling-tool).
 
-This workshop consists of three sessions and three Google Colab notebooks. 
+For this workshop, we'll be using a topic modeling algorithm, Latent Dirichlet Allocation (LDA), through the Python package, [Gensim](https://radimrehurek.com/gensim/). Using Gensim's standard topic modeling algorithm, the Google Colab notebook in this repo will walk you through creating an interactive topic modeling visualization using [pyLDAvis](https://github.com/bmabey/pyLDAvis).
 
-The first session introduces Google Colab and the basics of Python for importing and wrangling text data.
 
-The second session will explore visualizing topic models of text data with Gensim's LDA algorithm. 
+### Vector Space Modeling
 
-The third session explores three-dimensional visualizations of word embedding models with Gensim's Word2Vec script and the Tensorflow Projector. 
+Vector space modeling, also known as word embedding models, is a more recent innovation in text mining, first inaugurated by Google releasing their algorithm, Word2Vec. Unlike topic modeling, [vector space modeling](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html) allows you to explore the relationships between words in the same corpus. 
+
+For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). 
+
+
