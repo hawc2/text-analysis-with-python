@@ -12,7 +12,7 @@ There are many applications that support the use of Jupyter Notebooks, including
 
 [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) is a cloud-based run-time environment for coding in Jupyter Notebooks that takes advantage of Google's powerful computing resources. If you have a Google account, using Google Colab can be relatively seamless and user-friendly, integrated with Google Drive, and limiting the set-up necessary to start working. Google Colab also offers searchable code chunks to help you develop your code. 
 
-To see examples of Google colab notebooks and what they can do, check out [Awesome Google Colab](https://github.com/firmai/awesome-google-colab).
+To see examples of Google colab notebooks and what they can do, check out [Awesome Google Colab](https://github.com/firmai/awesome-google-colab). There are plenty of video tutorials on YouTube; I also recommend quick tip guides like the ones available at [Towards Data Science](https://towardsdatascience.com/10-tips-for-a-better-google-colab-experience-33f8fe721b82).
 
 ## Text Mining with Python
 
@@ -33,7 +33,7 @@ For this workshop, we'll be using a topic modeling algorithm, Latent Dirichlet A
 
 Vector space modeling, also known as word embedding models, is a more recent innovation in text mining, first inaugurated by Google releasing their algorithm, Word2Vec. Unlike topic modeling, [vector space modeling](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html) allows you to explore the relationships between words in the same corpus. 
 
-For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). For navigating the Tensorflow projector, this [cheatsheet](https://github.com/louishenrifranc/Tensorflow-Cheatsheet) is helpful.
+For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using [Matplotlib](https://matplotlib.org/) and, if the configuration works, the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). For navigating the Tensorflow projector, this [cheatsheet](https://github.com/louishenrifranc/Tensorflow-Cheatsheet) is helpful, although changes to the tool may make many guides out-of-date.
 
 ## Sample Datasets
 
