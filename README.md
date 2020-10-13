@@ -20,7 +20,7 @@ To see examples of Google colab notebooks and what they can do, check out [Aweso
 
 For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). 
 
-In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. The [Natural Language Toolkit](https://www.nltk.org) is a reliable library for text mining. The [NLTK Book](https://www.nltk.org/book/) guides you through the basic operations and fucntions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has also been created using Jupyter Notebooks.
+In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. The [Natural Language Toolkit](https://www.nltk.org) is a reliable library for text mining. The [NLTK Book](https://www.nltk.org/book/) guides you through the basic operations and functions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has also been created using Jupyter Notebooks.
 
 In this workshop, we'll use NLTK, as well as [Textblob](https://textblob.readthedocs.io/en/dev/), to process and clean text data.
 
