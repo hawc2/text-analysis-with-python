@@ -1,6 +1,6 @@
 # Text-Analysis-with-Python
 
-This repo contains materials for my Text Analysis with Python workshop for Temple University Libraries' Scholars Studio (Fall 2020)
+This repository contains materials for my Text Analysis with Python workshop for Temple University Libraries' Scholars Studio (Fall 2020)
 
 The workshop will introduce students to Jupyter Notebooks and Google Colab. We will overview the basics of Python for importing and wrangling text data, before turning to more advanced text mining algorithms, topic modeling and vector space modeling (also known as word embeddings).
 
@@ -38,7 +38,7 @@ For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimreh
 
 ## Sample Datasets
 
-For the purposes of the workshop, to save time, we won't be using as large a dataset as would normally be ideal. These scripts will work with .txt files and .csv files; you are welcome to use your own datasets if you have them. If you are looking for million word datasets to use for topic modeling or vector space modeling, there are many places to find them, including Google Dataset Search, and Kaggle's datasets. 
+I will provide sample datasets for each workshop session on this repo. For the purposes of the workshop, we won't be using as large a dataset as would normally be ideal. These scripts will work with .txt files and .csv files; you are welcome to use your own datasets if you have them. If you are looking for million word datasets to use for topic modeling or vector space modeling, there are many places to find them, including Google Dataset Search, and Kaggle's datasets. 
 
 Here is a useful dataset of literary and academic corpora at a million words each, available as single text files: http://www.thegrammarlab.com/?nor-portfolio=1000000-word-sample-corpora
 
