@@ -12,7 +12,7 @@ There are a variety of softwares that support the use of Jupyter Notebooks, incl
 
 ## Google Colab
 
-[Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) is a cloud-based, run-time environment for coding in Jupyter Notebooks that takes advantage of Google's powerful computing resources. As long as you have a Google account, using Google Colab can be relatively seamless and user-friendly. Integrated with Google Drive, Google Colab also offers searchable code recommendations to help you develop your code. 
+[Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) is a cloud-based, run-time environment for coding in Jupyter Notebooks that takes advantage of Google's powerful computing resources. As long as you have a Google account, Google Colab can access the files on your Google Drive. It tends to work best with [Google Chrome](https://www.google.com/chrome/index.html). Google Colab also offers useful features like searchable code recommendations to help you develop your scripts. 
 
 To see examples of Google colab notebooks and what they can do, check out [Awesome Google Colab](https://github.com/firmai/awesome-google-colab). There are plenty of video tutorials on YouTube; I also recommend quick-tip guides like the ones available at [Towards Data Science](https://towardsdatascience.com/10-tips-for-a-better-google-colab-experience-33f8fe721b82).
 
