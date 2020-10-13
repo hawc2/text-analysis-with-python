@@ -43,3 +43,5 @@ I will provide sample datasets for each workshop session on this repo. For the p
 Here is a useful dataset of literary and academic corpora at a million words each, available as single text files: http://www.thegrammarlab.com/?nor-portfolio=1000000-word-sample-corpora
 
 If you are looking for something more topical, the Coronavirus Corpus provides a larger set of news articles about the pandemic: https://www.english-corpora.org/corona/
+
+If you are interested in how to do text mining on non-English languages, check out [Quinn Dombrowski's Github repo](https://github.com/multilingual-dh/nlp-resources).
