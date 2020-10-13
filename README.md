@@ -4,11 +4,13 @@ This repo contains materials for my Text Analysis with Python workshop for Templ
 
 The workshop will introduce students to Jupyter Notebooks and Google Colab. We will overview the basics of Python for importing and wrangling text data, before turning to more advanced text mining algorithms, topic modeling and vector space modeling (also known as word embeddings).
 
-## Jupyter Notebooks and Google Colab
+## Jupyter Notebooks
 
 [Jupyter Notebooks](https://github.com/jupyter/notebook) offer a great way to learn to code and prototype programming applicaitons. Created by [Project Jupyter](https://jupyter.org/), Jupyter Notebooks are open-source, interactive, and web-based, allowing you to easily create, document, and share code and visualizations for many programming languages.
 
 There are a variety of softwares that support the use of Jupyter Notebooks, including integrated development environments like [Anaconda](https://docs.anaconda.com/anaconda/navigator/). Because the installation of programming libraries and the set up of a coding environment can be time-consuming and difficult when dealing with different user set-ups and operating systems, for this workshop, we'll be using Google Colab.
+
+## Google Colab
 
 [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) is a cloud-based, run-time environment for coding in Jupyter Notebooks that takes advantage of Google's powerful computing resources. If you have a Google account, using Google Colab can be relatively seamless and user-friendly. Integarted with Google Drive, Google Colab also offers searchable code recommendations to help you develop your code. 
 
