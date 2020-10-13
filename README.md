@@ -1,12 +1,12 @@
 # Text-Analysis-with-Python
 
-This repository contains materials for my Text Analysis with Python workshop for Temple University Libraries' Scholars Studio (Fall 2020)
+This repository contains materials for my Text Analysis with Python workshop for Temple University Libraries' Loretta C. Duckworth Scholars Studio (Fall 2020)
 
 The workshop will introduce students to Jupyter Notebooks and Google Colab. We will overview the basics of Python for importing and wrangling text data, before turning to more advanced text mining algorithms, topic modeling and vector space modeling (also known as word embeddings).
 
 ## Jupyter Notebooks
 
-[Jupyter Notebooks](https://github.com/jupyter/notebook) offer a great way to learn to code and prototype programming applicaitons. Created by [Project Jupyter](https://jupyter.org/), Jupyter Notebooks are open-source, interactive, and web-based, allowing you to easily create, document, and share code and visualizations for many programming languages.
+[Jupyter Notebooks](https://github.com/jupyter/notebook) offer a great way to learn to code and prototype programming applications. Created by [Project Jupyter](https://jupyter.org/), Jupyter Notebooks are open-source, interactive, and web-based, allowing you to easily create, document, and share code and visualizations for many programming languages.
 
 There are a variety of softwares that support the use of Jupyter Notebooks, including integrated development environments like [Anaconda](https://docs.anaconda.com/anaconda/navigator/). Because the installation of programming libraries and the set up of a coding environment can be time-consuming and difficult when dealing with different user set-ups and operating systems, for this workshop, we'll be using Google Colab.
 
