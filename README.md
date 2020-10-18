@@ -45,3 +45,7 @@ Here is a useful dataset of literary and academic corpora at a million words eac
 If you are looking for something more topical, the Coronavirus Corpus provides a larger set of news articles about the pandemic: https://www.english-corpora.org/corona/
 
 If you are interested in how to do text mining on non-English languages, check out [Quinn Dombrowski's Github repo](https://github.com/multilingual-dh/nlp-resources).
+
+## Learning Python 
+
+I recommend learning Python by identifying tasks and projects you want to do *with* Python. Learning Python by developing a [Flask](https://flask.palletsprojects.com/en/1.1.x/) web app, for instance, is a great way to start managing multiple scripts at once. But if you want to start from scratch and learn the basics of Python's syntax and semantics, there are endless tutorials available. [Learn Python the Hard Way](https://learntocodetogether.com/learn-python-the-hard-way-free-ebook-download/) is a popular book available freely as a PDF. [The Self-Taught Programmer](https://www.goodreads.com/book/show/51941365-the-self-taught-programmer) is a great introduction to programming using Python. You can also find useful video courses on YouTube, Linked-in Learning, and PluralSight, among others.
