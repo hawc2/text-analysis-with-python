@@ -18,7 +18,7 @@ To see examples of Google colab notebooks and what they can do, check out [Aweso
 
 ## Text Mining with Python
 
-For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). There's also a book that guides you through using Voyant, [Hermeneutica](https://mitpress.mit.edu/books/hermeneutica). Another cool web-based tool that walks you through cleaning your texts is [Lexos].(http://lexos.wheatoncollege.edu/upload).
+For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). There's also a book that guides you through using Voyant, [Hermeneutica](https://mitpress.mit.edu/books/hermeneutica). Another cool web-based tool that walks you through cleaning your texts is [Lexos](http://lexos.wheatoncollege.edu/upload).
 
 In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. The [Natural Language Toolkit](https://www.nltk.org) is a reliable library for text mining. The [NLTK Book](https://www.nltk.org/book/) guides you through the basic operations and functions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has also been created using Jupyter Notebooks.
 
@@ -42,9 +42,9 @@ For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimreh
 
 I will provide sample datasets for each workshop session on this repo. For the purposes of the workshop, we won't be using as large a dataset as would normally be ideal. These scripts will work with .txt files and .csv files; you are welcome to use your own datasets if you have them. If you are looking for million word datasets to use for topic modeling or vector space modeling, there are many places to find them, including Google Dataset Search, and Kaggle's datasets. 
 
-Here is a useful dataset of literary and academic corpora at a million words each, available as single text files: http://www.thegrammarlab.com/?nor-portfolio=1000000-word-sample-corpora
+Here is a useful dataset of literary and academic corpora at a million words each, available as [downloadable text files](http://www.thegrammarlab.com/?nor-portfolio=1000000-word-sample-corpora).
 
-If you are looking for something more topical, the Coronavirus Corpus provides a larger set of news articles about the pandemic: https://www.english-corpora.org/corona/
+If you are looking for something more topical, the Coronavirus Corpus provides a larger set of [news articles about the pandemic](https://www.english-corpora.org/corona/).
 
 If you are interested in how to do text mining on non-English languages, check out [Quinn Dombrowski's Github repo](https://github.com/multilingual-dh/nlp-resources).
 
