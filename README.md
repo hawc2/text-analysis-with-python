@@ -30,6 +30,8 @@ In this workshop, we'll use NLTK, as well as [Textblob](https://textblob.readthe
 
 For this workshop, we'll be using a topic modeling algorithm, Latent Dirichlet Allocation (LDA), through the Python library, [Gensim](https://radimrehurek.com/gensim/). The Google Colab notebook I will upload to this repo will walk you through creating an interactive topic modeling visualization using [pyLDAvis](https://github.com/bmabey/pyLDAvis).
 
+A few tutorials online will guide you through this process in more elaborate detail than the notebooks we'll be using for these workshop sessions. I recommend this toturial from [Machine Learning Plus](https://www.machinelearningplus.com/nlp/topic-modeling-gensim-python/) and [Towards Data Science](https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21).
+
 ### Vector Space Modeling
 
 Vector space modeling (aka word embeddings) is a more recent innovation in text mining, first developed by Google as Word2Vec. Unlike topic modeling, [vector space modeling](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html) allows you to explore the relationships between words in a corpus as they appear in sequence, unlike topic modeling, which typically ignores the order of words in a document. 
@@ -51,3 +53,5 @@ If you are interested in how to do text mining on non-English languages, check o
 I recommend learning Python by identifying tasks and projects you want to do *with* Python. Learning Python by developing a [Flask](https://flask.palletsprojects.com/en/1.1.x/) web app, for instance, is a great way to start managing multiple scripts at once. But if you want to start from scratch and learn the basics of Python's syntax and semantics, there are endless tutorials available. 
 
 [Learn Python the Hard Way](https://learntocodetogether.com/learn-python-the-hard-way-free-ebook-download/) is a popular book available freely as a PDF. [The Self-Taught Programmer](https://www.goodreads.com/book/show/51941365-the-self-taught-programmer) is a great introduction to programming using Python. You can also find useful video courses on YouTube, Linked-in Learning, and PluralSight, among others. To use your smartphone to practice programming in Python and other languages, check out [Enki](https://play.google.com/store/apps/details?id=com.enki.insights&hl=en_US&gl=US), [Programming Hub](https://programminghub.io/), or [Mimo](https://getmimo.com/).
+
+If you search around, you can also find plenty of [Intro to Python Jupyter Notebooks](https://jupyter.brynmawr.edu/services/public/dblank/CS245%20Programming%20Languages/2016-Fall/Labs/Chapter%2002%20-%20Introduction%20to%20Python.ipynb).
