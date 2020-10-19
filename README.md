@@ -18,7 +18,7 @@ To see examples of Google colab notebooks and what they can do, check out [Aweso
 
 ## Text Mining with Python
 
-For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). 
+For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). There's also a book that guides you through using Voyant, [Hermeneutica](https://mitpress.mit.edu/books/hermeneutica). Another cool web-based tool that walks you through cleaning your texts is [Lexos].(http://lexos.wheatoncollege.edu/upload).
 
 In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. The [Natural Language Toolkit](https://www.nltk.org) is a reliable library for text mining. The [NLTK Book](https://www.nltk.org/book/) guides you through the basic operations and functions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has also been created using Jupyter Notebooks.
 
@@ -48,4 +48,6 @@ If you are interested in how to do text mining on non-English languages, check o
 
 ## Learning Python 
 
-I recommend learning Python by identifying tasks and projects you want to do *with* Python. Learning Python by developing a [Flask](https://flask.palletsprojects.com/en/1.1.x/) web app, for instance, is a great way to start managing multiple scripts at once. But if you want to start from scratch and learn the basics of Python's syntax and semantics, there are endless tutorials available. [Learn Python the Hard Way](https://learntocodetogether.com/learn-python-the-hard-way-free-ebook-download/) is a popular book available freely as a PDF. [The Self-Taught Programmer](https://www.goodreads.com/book/show/51941365-the-self-taught-programmer) is a great introduction to programming using Python. You can also find useful video courses on YouTube, Linked-in Learning, and PluralSight, among others.
+I recommend learning Python by identifying tasks and projects you want to do *with* Python. Learning Python by developing a [Flask](https://flask.palletsprojects.com/en/1.1.x/) web app, for instance, is a great way to start managing multiple scripts at once. But if you want to start from scratch and learn the basics of Python's syntax and semantics, there are endless tutorials available. 
+
+[Learn Python the Hard Way](https://learntocodetogether.com/learn-python-the-hard-way-free-ebook-download/) is a popular book available freely as a PDF. [The Self-Taught Programmer](https://www.goodreads.com/book/show/51941365-the-self-taught-programmer) is a great introduction to programming using Python. You can also find useful video courses on YouTube, Linked-in Learning, and PluralSight, among others. To use your smartphone to practice programming in Python and other languages, check out [Enki](https://play.google.com/store/apps/details?id=com.enki.insights&hl=en_US&gl=US), [Programming Hub](https://programminghub.io/), or [Mimo](https://getmimo.com/).
