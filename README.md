@@ -32,6 +32,8 @@ For this workshop, we'll be using a topic modeling algorithm, Latent Dirichlet A
 
 A few tutorials online will guide you through this process in more elaborate detail than the notebooks we'll be using for these workshop sessions. I recommend this toturial from [Machine Learning Plus](https://www.machinelearningplus.com/nlp/topic-modeling-gensim-python/) and [Towards Data Science](https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21).
 
+The Topic Modeling Jupyter Notebook in this repository is prepared to work with two datasets on this repository. One dataset is a collection of Rotten Tomatoes reviews of war films that I scraped using a script on another repo of mine. The other dataset is a collection of extracted features of copyrighte science fiction novels, containing disaggregated bags-of-words sets per chapter for each novel. Warning: the latter dataset won't produce normal bi-grams and tri-grams.
+
 ### Vector Space Modeling
 
 Vector space modeling (aka word embeddings) is a more recent innovation in text mining, first developed by Google as Word2Vec. Unlike topic modeling, [vector space modeling](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html) allows you to explore the relationships between words in a corpus as they appear in sequence, unlike topic modeling, which typically ignores the order of words in a document. 
