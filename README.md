@@ -22,7 +22,7 @@ For a user-friendly tool to learn the basics of text mining, check out [Voyant](
 
 In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. The [Natural Language Toolkit](https://www.nltk.org) is a reliable library for text mining. The [NLTK Book](https://www.nltk.org/book/) guides you through the basic operations and functions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has also been created using Jupyter Notebooks.
 
-In this workshop, we'll use NLTK, as well as [Textblob](https://textblob.readthedocs.io/en/dev/), to process and clean text data.
+In this workshop, we'll use a combination of in-built Python functions, NLTK, [Textblob](https://textblob.readthedocs.io/en/dev/), [Spacy](https://spacy.io/), and Gensim to process and clean text data.
 
 ### Topic Modeling
 
