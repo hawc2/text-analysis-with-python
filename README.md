@@ -18,11 +18,11 @@ To see examples of Google colab notebooks and what they can do, check out [Aweso
 
 ## Text Mining with Python
 
-For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). There's also a book that guides you through using Voyant, [Hermeneutica](https://mitpress.mit.edu/books/hermeneutica). Another cool web-based tool that walks you through cleaning your texts is [Lexos](http://lexos.wheatoncollege.edu/upload).
+For a user-friendly tool to learn the basics of text mining, check out [Voyant](https://voyant-tools.org/). There's also a book that guides you through using Voyant: check out the online version of [Hermeneutica](http://hermeneuti.ca/). Another cool web-based tool that walks you through cleaning your texts is [Lexos](http://lexos.wheatoncollege.edu/upload).
 
 In the Python programming language, only a few powerful libraries are necessary to achieve interesting results. The [Natural Language Toolkit](https://www.nltk.org) is a reliable library for text mining. The [NLTK Book](https://www.nltk.org/book/) guides you through the basic operations and functions. A [hands-on NLTK tutorial](https://github.com/hb20007/hands-on-nltk-tutorial) has also been created using Jupyter Notebooks.
 
-In this workshop, we'll use a combination of in-built Python functions, NLTK, [Textblob](https://textblob.readthedocs.io/en/dev/), [Spacy](https://spacy.io/), and Gensim to process and clean text data.
+In this workshop, we'll use a combination of in-built Python functions, NLTK, [Textblob](https://textblob.readthedocs.io/en/dev/), [Spacy](https://spacy.io/), and Gensim to process and clean text data. We also use the Python library, `re` - to learn more about regular expressions, visit https://regexr.com/ and try out the [Regex Crossword](https://regexcrossword.com/).
 
 ### Topic Modeling
 
