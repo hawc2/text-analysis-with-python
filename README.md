@@ -26,7 +26,7 @@ In this workshop, we'll use a combination of in-built Python functions, NLTK, [T
 
 ### Topic Modeling
 
-[Topic modeling](http://journalofdigitalhumanities.org/2-1/topic-modeling-a-basic-introduction-by-megan-r-brett/) is one of the most commonly used forms of computational text analysis, helping you identify commonly recurring words and topics as they are distributed across a series of documents. There are many ways to do topic modeling, including multiple different algorithms, and a GUI-based tool by [Scott Enderle](https://github.com/senderle/topic-modeling-tool).
+[Topic modeling](http://journalofdigitalhumanities.org/2-1/topic-modeling-a-basic-introduction-by-megan-r-brett/) is one of the most commonly used forms of computational text analysis, helping you identify commonly recurring words and topics as they are distributed across a series of documents. There are many ways to do topic modeling, including multiple different algorithms, a [GUI-based tool](https://github.com/senderle/topic-modeling-tool) by Scott Enderle, and a [web-based tool](https://mimno.infosci.cornell.edu/jsLDA/) by David Mimno.
 
 For this workshop, we'll be using a topic modeling algorithm, Latent Dirichlet Allocation (LDA), through the Python library, [Gensim](https://radimrehurek.com/gensim/). The Google Colab notebook I will upload to this repo will walk you through creating an interactive topic modeling visualization using [pyLDAvis](https://github.com/bmabey/pyLDAvis).
 
