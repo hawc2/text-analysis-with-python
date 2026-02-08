@@ -1,8 +1,8 @@
 # Text-Analysis-with-Python
 
-This repository contains materials for my Text Analysis with Python workshop for Temple University Libraries' Loretta C. Duckworth Scholars Studio (Fall 2020).
+This repository contains materials for my Text Analysis with Python workshops.
 
-The workshop will introduce students to Jupyter Notebooks and Google Colab. We will overview the basics of Python for importing and wrangling text data, before turning to more advanced text mining algorithms, topic modeling and vector space modeling (also known as word embeddings).
+The workshop introduces students to Jupyter Notebooks and Google Colab. We will overview the basics of Python for importing and wrangling text data, before turning to more advanced text mining algorithms, topic modeling and vector space modeling (also known as word embeddings).
 
 ## Jupyter Notebooks
 
