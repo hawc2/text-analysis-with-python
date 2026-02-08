@@ -1,3 +1,4 @@
 .DS_Store
 notebooks/transformers/gpt2-finetuned/
 *.safetensors
+notebooks/word2vec/logs/
