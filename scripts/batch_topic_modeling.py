@@ -109,7 +109,7 @@ class TopicModelingPipeline:
                 raise
 
         # Disable unnecessary spaCy components for speed
-        self.nlp.disable_pipes([pipe for pipe in self.nlp.pipe_names if pipe not in ['tok2vec', 'tagger', 'lemmatizer']])
+        self.nlp.disable_pipes([pipe for pipe in self.nlp.pipe_names if pipe not in ['tok2vec', 'tagger', 'attribute_ruler', 'morphologizer', 'lemmatizer']])
 
         self.bigram_mod = None
         self.trigram_mod = None
@@ -214,7 +214,6 @@ class TopicModelingPipeline:
             iterations=self.iterations,
             alpha='auto',
             per_word_topics=True,
-            workers=self.workers
         )
 
         return self.lda_model
