@@ -1,4 +1,6 @@
 .DS_Store
+__pycache__/
+.venv/
 notebooks/transformers/gpt2-finetuned/
 *.safetensors
 notebooks/word2vec/logs/
