@@ -92,7 +92,79 @@ python scripts/train_word2vec.py \
     --epochs 10
 ```
 
-### 3. nlp_utils.py
+### 3. visualize_embeddings_plotly.py
+
+Interactive 3D visualization of word embeddings with analogy arrows using Plotly.
+
+**Features:**
+- Load any Gensim Word2Vec model
+- PCA, t-SNE, or UMAP reduction to 3D
+- Directional arrows showing analogy relationships (e.g., man->woman parallel to king->queen)
+- Color-coded semantic groups
+- Fully interactive HTML output (rotate, zoom, hover)
+
+**Usage:**
+
+```bash
+# Basic: top 200 words in 3D PCA
+python scripts/visualize_embeddings_plotly.py \
+    --model results/word2vec.model --top-n 200
+
+# With analogy arrows and color groups
+python scripts/visualize_embeddings_plotly.py \
+    --model results/word2vec.model \
+    --words man woman king queen prince princess hero heroine robot android \
+    --analogies "man:woman,king:queen;man:woman,hero:heroine" \
+    --groups "royalty:king,queen,prince,princess;gender:man,woman;tech:robot,android" \
+    --output analogies_3d.html
+
+# Using t-SNE instead of PCA
+python scripts/visualize_embeddings_plotly.py \
+    --model results/word2vec.model \
+    --words ship spaceship car bus truck \
+    --method tsne --output transport.html
+```
+
+**Output:** Interactive HTML file viewable in any browser.
+
+### 4. visualize_embeddings_whatlies.py
+
+Word embedding visualization using the whatlies library, with arrow plots, semantic axis projections, and similarity heatmaps.
+
+**Features:**
+- Arrow plots showing word vector directions
+- Project words onto semantic axes (e.g., man-woman axis vs rich-poor axis)
+- Cosine similarity heatmaps
+- PCA and UMAP interactive scatter plots
+
+**Usage:**
+
+```bash
+# Arrow plot
+python scripts/visualize_embeddings_whatlies.py \
+    --model results/word2vec.model \
+    --words king queen man woman prince princess
+
+# Project onto semantic axes
+python scripts/visualize_embeddings_whatlies.py \
+    --model results/word2vec.model \
+    --words king queen prince princess duke duchess \
+    --x-axis man woman --y-axis rich poor --output projection.html
+
+# Multiple visualization types
+python scripts/visualize_embeddings_whatlies.py \
+    --model results/word2vec.model \
+    --words king queen man woman prince princess \
+    --viz-types arrow similarity pca --output viz.html
+```
+
+**Output:** HTML files (one per visualization type if multiple specified).
+
+### 5. scrollytelling/ (separate directory)
+
+3D scrollytelling essay builder. See `scrollytelling/` directory for the build script (`build.py`) and HTML template (`template.html`). Generates scroll-driven 3D narratives through word embedding space using Three.js + GSAP ScrollTrigger.
+
+### 6. nlp_utils.py
 
 Utility functions for text preprocessing, tokenization, and corpus preparation.
 

@@ -40,6 +40,37 @@ Vector space modeling (aka word embeddings) is a more recent innovation in text 
 
 For this workshop, we'll be using [Gensim's Word2Vec algorithm](https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html). To visualize the word embedding model, we'll be using [Matplotlib](https://matplotlib.org/) and, if the configuration works with Google Colab, the [Tensorflow Embedding Projector](https://projector.tensorflow.org/). For navigating the Tensorflow projector, this [cheatsheet](https://github.com/louishenrifranc/Tensorflow-Cheatsheet) is helpful, although continual changes to the software make many guides out-of-date. For a good Jupyter Notebook guide to Word2vec, check out [Lauren Klein's repo](https://github.com/laurenfklein/emory-qtm340/blob/master/notebooks/class12-word-vectors-complete.ipynb). For a solid R script for Word2vec, check out [Ben Schmidt's repo](https://github.com/bmschmidt/wordVectors).
 
+## Scrollytelling Visualization
+
+The `scrollytelling/` directory contains a pipeline for turning Word2Vec models into self-contained, scroll-driven 3D essays. The output is a single HTML file that can be hosted on any static site (GitHub Pages, Hugo, etc.) with no server-side dependencies.
+
+**Pipeline:** Train Word2Vec model → reduce to 3D (PCA/t-SNE) → inject into Three.js template → publish
+
+**What it produces:** A narrated scroll through word embedding space with:
+
+- 2,000+ word point cloud with bloom post-processing
+- 8 narrative sections that highlight thematic clusters (gender, technology, contagion, space)
+- Analogy arrows showing parallel relationships (man→woman // king→queen)
+- Vector arithmetic visualization (king - man + woman = queen)
+- Smooth camera transitions, progress indicator, section-colored labels
+
+**Usage:**
+
+```bash
+# Build from a trained Word2Vec model
+python scrollytelling/build.py \
+    --model path/to/word2vec.model \
+    --output path/to/scrollytelling.html
+
+# With t-SNE and more background words
+python scrollytelling/build.py \
+    --model path/to/word2vec.model \
+    --top-n 3000 --method tsne \
+    --output scrollytelling_tsne.html
+```
+
+The narrative sections, highlighted words, and analogy pairs are defined in `scrollytelling/build.py`. The Three.js + GSAP ScrollTrigger template is in `scrollytelling/template.html`.
+
 ## Sample Datasets
 
 I will provide sample datasets for each workshop session on this repo. For the purposes of the workshop, we won't be using as large a dataset as would normally be ideal. These scripts will work with .txt files and .csv files; you are welcome to use your own datasets if you have them. If you are looking for million word datasets to use for topic modeling or vector space modeling, there are many places to find them, including Google Dataset Search, and Kaggle's datasets. 

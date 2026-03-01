@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Embeddings in Science Fiction</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0a0a0a;
+    color: #d4d4d4;
+    font-family: Georgia, 'Times New Roman', serif;
+    overflow-x: hidden;
+}
+
+#three-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#three-container canvas {
+    display: block;
+}
+
+#label-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#scroll-content {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.scroll-spacer {
+    pointer-events: none;
+}
+
+.narrative-section {
+    min-height: 120vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.section-inner {
+    max-width: 420px;
+    background: rgba(10, 10, 10, 0.82);
+    border-left: 3px solid rgba(255, 255, 255, 0.15);
+    padding: 2rem 2rem 2rem 1.8rem;
+    pointer-events: auto;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.section-inner.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-inner h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.section-inner p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 0.9rem;
+    color: #c0c0c0;
+}
+
+.section-inner p:last-child {
+    margin-bottom: 0;
+}
+
+.section-inner em {
+    color: #ffffff;
+    font-style: italic;
+}
+
+.word-label {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 11px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1px 4px;
+    border-radius: 2px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, color 0.5s ease;
+}
+
+.word-label.visible {
+    opacity: 1;
+}
+
+#loading {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+    z-index: 999;
+    font-family: 'SF Mono', monospace;
+    font-size: 0.9rem;
+    color: #6e8898;
+    transition: opacity 0.6s ease;
+}
+
+#loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.section-color-bar {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Progress indicator */
+#progress-dots {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+}
+
+.progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.progress-dot.active {
+    width: 10px;
+    height: 10px;
+    transform: translateX(-1px);
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+</head>
+<body>
+
+<div id="loading">Loading embedding data...</div>
+<div id="three-container"></div>
+<div id="label-container"></div>
+<div id="scroll-content"></div>
+<div id="progress-dots"></div>
+
+<script>
+window.__EMBEDDING_DATA__ = {{DATA_PLACEHOLDER}};
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+const DATA = window.__EMBEDDING_DATA__;
+
+// ── Index lookup ──
+const wordToIdx = {};
+DATA.words.forEach((w, i) => wordToIdx[w] = i);
+
+// ── Scene setup ──
+const container = document.getElementById('three-container');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0a);
+scene.fog = new THREE.FogExp2(0x0a0a0a, 0.003);
+
+const camera = new THREE.PerspectiveCamera(
+    50, window.innerWidth / window.innerHeight, 0.1, 500
+);
+camera.position.set(0, 30, 100);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ReinhardToneMapping;
+renderer.toneMappingExposure = 1.0;
+container.appendChild(renderer.domElement);
+
+// ── Bloom post-processing ──
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.6,   // strength
+    0.5,   // radius
+    0.25   // threshold
+);
+composer.addPass(bloomPass);
+
+// ── CSS2D label renderer ──
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.id = 'label-container';
+const existingLabel = document.getElementById('label-container');
+existingLabel.replaceWith(labelRenderer.domElement);
+labelRenderer.domElement.style.position = 'fixed';
+labelRenderer.domElement.style.top = '0';
+labelRenderer.domElement.style.left = '0';
+labelRenderer.domElement.style.pointerEvents = 'none';
+labelRenderer.domElement.style.zIndex = '1';
+
+// ── Point cloud ──
+const N = DATA.coords.length;
+const positions = new Float32Array(N * 3);
+const highlights = new Float32Array(N);
+const targetHighlights = new Float32Array(N);
+const colors = new Float32Array(N * 3);
+const targetColors = new Float32Array(N * 3);
+
+const BASE_COLOR = [0.45, 0.55, 0.65];
+
+for (let i = 0; i < N; i++) {
+    positions[i * 3] = DATA.coords[i][0];
+    positions[i * 3 + 1] = DATA.coords[i][1];
+    positions[i * 3 + 2] = DATA.coords[i][2];
+    highlights[i] = 0.0;
+    targetHighlights[i] = 0.0;
+    colors[i * 3] = BASE_COLOR[0];
+    colors[i * 3 + 1] = BASE_COLOR[1];
+    colors[i * 3 + 2] = BASE_COLOR[2];
+    targetColors[i * 3] = BASE_COLOR[0];
+    targetColors[i * 3 + 1] = BASE_COLOR[1];
+    targetColors[i * 3 + 2] = BASE_COLOR[2];
+}
+
+const cloudGeometry = new THREE.BufferGeometry();
+cloudGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+cloudGeometry.setAttribute('highlight', new THREE.BufferAttribute(highlights, 1));
+cloudGeometry.setAttribute('aColor', new THREE.BufferAttribute(colors, 3));
+
+const cloudMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+        uPixelRatio: { value: renderer.getPixelRatio() },
+    },
+    vertexShader: `
+        attribute float highlight;
+        attribute vec3 aColor;
+        varying float vHighlight;
+        varying vec3 vColor;
+        uniform float uPixelRatio;
+        void main() {
+            vHighlight = highlight;
+            vColor = aColor;
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            float baseSize = mix(2.0, 7.0, highlight);
+            gl_PointSize = baseSize * uPixelRatio * (250.0 / -mvPosition.z);
+            gl_PointSize = clamp(gl_PointSize, 0.5, 24.0);
+            gl_Position = projectionMatrix * mvPosition;
+        }
+    `,
+    fragmentShader: `
+        varying float vHighlight;
+        varying vec3 vColor;
+        void main() {
+            float dist = length(gl_PointCoord - vec2(0.5));
+            if (dist > 0.5) discard;
+            float edge = smoothstep(0.5, 0.25, dist);
+            float alpha = mix(0.20, 0.95, vHighlight) * edge;
+            gl_FragColor = vec4(vColor, alpha);
+        }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+});
+
+const pointCloud = new THREE.Points(cloudGeometry, cloudMaterial);
+scene.add(pointCloud);
+
+// ── Labels ──
+const labelledWords = new Set();
+DATA.sections.forEach(s => {
+    (s.words || []).forEach(w => labelledWords.add(w));
+});
+
+const wordLabels = {};
+labelledWords.forEach(word => {
+    const idx = wordToIdx[word];
+    if (idx === undefined) return;
+    const div = document.createElement('div');
+    div.className = 'word-label';
+    div.textContent = word;
+    const labelObj = new CSS2DObject(div);
+    const [x, y, z] = DATA.coords[idx];
+    labelObj.position.set(x, y + 0.8, z);
+    scene.add(labelObj);
+    wordLabels[word] = div;
+});
+
+// ── Arrows ──
+const arrowGroups = [];
+
+function createArrowPair(arrowData, color) {
+    const group = new THREE.Group();
+    const pairColor = new THREE.Color(color);
+
+    const pairs = [
+        { from: arrowData.from, to: arrowData.to },
+        { from: arrowData.from2, to: arrowData.to2 },
+    ];
+
+    pairs.forEach(pair => {
+        const start = new THREE.Vector3(...pair.from);
+        const end = new THREE.Vector3(...pair.to);
+        const dir = end.clone().sub(start);
+        const len = dir.length();
+        dir.normalize();
+
+        // Shaft
+        const lineGeom = new THREE.BufferGeometry().setFromPoints([start, end]);
+        const lineMat = new THREE.LineBasicMaterial({
+            color: pairColor, transparent: true, opacity: 0.8,
+        });
+        group.add(new THREE.Line(lineGeom, lineMat));
+
+        // Arrowhead (constant small size)
+        const coneGeom = new THREE.ConeGeometry(0.15, 0.4, 6);
+        const coneMat = new THREE.MeshBasicMaterial({
+            color: pairColor, transparent: true, opacity: 0.85,
+        });
+        const cone = new THREE.Mesh(coneGeom, coneMat);
+        cone.position.copy(end);
+        const up = new THREE.Vector3(0, 1, 0);
+        cone.quaternion.setFromUnitVectors(up, dir);
+        group.add(cone);
+    });
+
+    group.visible = false;
+    scene.add(group);
+    return group;
+}
+
+// Pre-create arrows for each section
+DATA.sections.forEach((section, si) => {
+    const sectionArrows = [];
+    (section.arrows || []).forEach(a => {
+        sectionArrows.push(createArrowPair(a, section.color));
+    });
+    arrowGroups.push(sectionArrows);
+});
+
+// ── Arithmetic arrows (section 6 special) ──
+let arithmeticGroup = null;
+const arithSection = DATA.sections.find(s => s.arithmetic);
+if (arithSection && arithSection.arithmetic) {
+    const a = arithSection.arithmetic;
+    arithmeticGroup = new THREE.Group();
+
+    const manPos = new THREE.Vector3(...a.man);
+    const womanPos = new THREE.Vector3(...a.woman);
+    const kingPos = new THREE.Vector3(...a.king);
+    const computedPos = new THREE.Vector3(...a.computed);
+    const queenPos = new THREE.Vector3(...a.queen);
+
+    addArrow(arithmeticGroup, manPos, womanPos, '#e74c3c');
+    addArrow(arithmeticGroup, kingPos, computedPos, '#8e44ad');
+    // Dashed line: computed -> queen
+    const dashGeom = new THREE.BufferGeometry().setFromPoints([computedPos, queenPos]);
+    const dashMat = new THREE.LineDashedMaterial({
+        color: 0xffffff, dashSize: 0.5, gapSize: 0.3,
+        transparent: true, opacity: 0.5,
+    });
+    const dashLine = new THREE.Line(dashGeom, dashMat);
+    dashLine.computeLineDistances();
+    arithmeticGroup.add(dashLine);
+
+    arithmeticGroup.visible = false;
+    scene.add(arithmeticGroup);
+}
+
+function addArrow(group, start, end, color) {
+    const dir = end.clone().sub(start);
+    dir.normalize();
+    const c = new THREE.Color(color);
+    const lineGeom = new THREE.BufferGeometry().setFromPoints([start, end]);
+    const lineMat = new THREE.LineBasicMaterial({ color: c, transparent: true, opacity: 0.8 });
+    group.add(new THREE.Line(lineGeom, lineMat));
+    const coneGeom = new THREE.ConeGeometry(0.15, 0.4, 6);
+    const coneMat = new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.85 });
+    const cone = new THREE.Mesh(coneGeom, coneMat);
+    cone.position.copy(end);
+    cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+    group.add(cone);
+}
+
+// ── Build scroll sections ──
+const scrollContent = document.getElementById('scroll-content');
+
+// Top spacer for breathing room
+const topSpacer = document.createElement('div');
+topSpacer.className = 'scroll-spacer';
+topSpacer.style.height = '20vh';
+scrollContent.appendChild(topSpacer);
+
+DATA.sections.forEach((section, i) => {
+    const el = document.createElement('section');
+    el.className = 'narrative-section';
+    el.id = `section-${i}`;
+    el.innerHTML = `
+        <div class="section-inner">
+            <h2>
+                <span class="section-color-bar" style="background:${section.color}"></span>
+                ${section.title}
+            </h2>
+            ${section.body}
+        </div>
+    `;
+    scrollContent.appendChild(el);
+});
+
+// Bottom spacer
+const bottomSpacer = document.createElement('div');
+bottomSpacer.className = 'scroll-spacer';
+bottomSpacer.style.height = '30vh';
+scrollContent.appendChild(bottomSpacer);
+
+// ── Progress dots ──
+const progressContainer = document.getElementById('progress-dots');
+DATA.sections.forEach((section, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'progress-dot';
+    dot.title = section.title;
+    dot.addEventListener('click', () => {
+        const target = document.getElementById(`section-${i}`);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+    progressContainer.appendChild(dot);
+});
+const progressDots = progressContainer.querySelectorAll('.progress-dot');
+
+function updateProgressDots(i, color) {
+    progressDots.forEach((dot, di) => {
+        if (di === i) {
+            dot.classList.add('active');
+            dot.style.background = color;
+        } else {
+            dot.classList.remove('active');
+            dot.style.background = 'rgba(255, 255, 255, 0.2)';
+        }
+    });
+}
+
+// ── Camera animation state ──
+const lookAtTarget = new THREE.Vector3(0, 0, 0);
+let currentSection = -1;
+let orbitAngle = 0;
+let orbitActive = false;
+let orbitCentroid = [0, 0, 0];
+let orbitDistance = 100;
+
+function activateSection(i) {
+    if (i === currentSection) return;
+    currentSection = i;
+    const section = DATA.sections[i];
+
+    // Use bounding radius for smart camera distance, fall back to hardcoded
+    const d = section.boundingRadius
+        ? Math.max(section.boundingRadius * 2.5, 15)
+        : section.cameraDistance;
+
+    const isOverview = i === 0 || i === 1 || i === DATA.sections.length - 1;
+
+    if (isOverview) {
+        // Enable orbit mode
+        orbitActive = true;
+        orbitCentroid = section.centroid;
+        orbitDistance = d;
+        // Let the orbit loop handle camera position
+        gsap.to(lookAtTarget, {
+            x: section.centroid[0],
+            y: section.centroid[1],
+            z: section.centroid[2],
+            duration: 2.0,
+            ease: 'power2.inOut',
+        });
+        gsap.to(camera.position, {
+            y: section.centroid[1] + d * 0.35,
+            duration: 2.0,
+            ease: 'power2.inOut',
+        });
+    } else {
+        // Disable orbit, let GSAP fully control camera
+        orbitActive = false;
+        gsap.to(camera.position, {
+            x: section.centroid[0] + d * 0.7,
+            y: section.centroid[1] + d * 0.35,
+            z: section.centroid[2] + d * 0.65,
+            duration: 2.0,
+            ease: 'power2.inOut',
+        });
+        gsap.to(lookAtTarget, {
+            x: section.centroid[0],
+            y: section.centroid[1],
+            z: section.centroid[2],
+            duration: 2.0,
+            ease: 'power2.inOut',
+        });
+    }
+
+    // Set target highlights (lerped in animate loop)
+    const highlightSet = new Set(section.indices);
+    const sectionColor = new THREE.Color(section.color);
+
+    for (let j = 0; j < N; j++) {
+        if (highlightSet.has(j)) {
+            targetHighlights[j] = 1.0;
+            targetColors[j * 3] = sectionColor.r;
+            targetColors[j * 3 + 1] = sectionColor.g;
+            targetColors[j * 3 + 2] = sectionColor.b;
+        } else {
+            targetHighlights[j] = 0.0;
+            targetColors[j * 3] = BASE_COLOR[0];
+            targetColors[j * 3 + 1] = BASE_COLOR[1];
+            targetColors[j * 3 + 2] = BASE_COLOR[2];
+        }
+    }
+
+    // Toggle labels with section color
+    Object.values(wordLabels).forEach(div => div.classList.remove('visible'));
+    (section.words || []).forEach(word => {
+        if (wordLabels[word]) {
+            wordLabels[word].classList.add('visible');
+            wordLabels[word].style.color = section.color;
+        }
+    });
+
+    // Toggle arrows
+    arrowGroups.forEach((group, si) => {
+        group.forEach(arrow => arrow.visible = (si === i));
+    });
+
+    // Arithmetic group
+    if (arithmeticGroup) {
+        const arithIdx = DATA.sections.findIndex(s => s.arithmetic);
+        arithmeticGroup.visible = (i === arithIdx);
+    }
+
+    // Text panel animation
+    document.querySelectorAll('.section-inner').forEach((el, si) => {
+        if (si === i) {
+            el.classList.add('visible');
+        } else {
+            el.classList.remove('visible');
+        }
+    });
+
+    // Update progress dots
+    updateProgressDots(i, section.color);
+}
+
+// ── ScrollTrigger ──
+gsap.registerPlugin(ScrollTrigger);
+
+DATA.sections.forEach((_, i) => {
+    ScrollTrigger.create({
+        trigger: `#section-${i}`,
+        start: 'top 60%',
+        end: 'bottom 40%',
+        onEnter: () => activateSection(i),
+        onEnterBack: () => activateSection(i),
+    });
+});
+
+// ── Animation loop ──
+const LERP_SPEED = 0.08;
+let isTransitioning = false;
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    // Smooth highlight lerp
+    const highlightAttr = cloudGeometry.getAttribute('highlight');
+    const colorAttr = cloudGeometry.getAttribute('aColor');
+    let needsUpdate = false;
+
+    for (let j = 0; j < N; j++) {
+        const hCurrent = highlightAttr.array[j];
+        const hTarget = targetHighlights[j];
+        if (Math.abs(hCurrent - hTarget) > 0.001) {
+            highlightAttr.array[j] += (hTarget - hCurrent) * LERP_SPEED;
+            needsUpdate = true;
+        }
+
+        for (let c = 0; c < 3; c++) {
+            const idx = j * 3 + c;
+            const cCurrent = colorAttr.array[idx];
+            const cTarget = targetColors[idx];
+            if (Math.abs(cCurrent - cTarget) > 0.001) {
+                colorAttr.array[idx] += (cTarget - cCurrent) * LERP_SPEED;
+                needsUpdate = true;
+            }
+        }
+    }
+
+    if (needsUpdate) {
+        highlightAttr.needsUpdate = true;
+        colorAttr.needsUpdate = true;
+    }
+
+    // Orbit rotation for overview sections
+    if (orbitActive) {
+        orbitAngle += 0.001;
+        camera.position.x = orbitCentroid[0] + Math.cos(orbitAngle) * orbitDistance * 0.9;
+        camera.position.z = orbitCentroid[2] + Math.sin(orbitAngle) * orbitDistance * 0.9;
+    }
+
+    camera.lookAt(lookAtTarget);
+    composer.render();
+    labelRenderer.render(scene, camera);
+}
+
+// ── Resize ──
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ── Start ──
+activateSection(0);
+animate();
+
+// Hide loading screen
+requestAnimationFrame(() => {
+    document.getElementById('loading').classList.add('hidden');
+    setTimeout(() => document.getElementById('loading').remove(), 700);
+});
+</script>
+</body>
+</html>

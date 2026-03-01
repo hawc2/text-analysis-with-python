@@ -4,6 +4,7 @@ matplotlib
 nltk
 numpy
 pandas
+plotly
 pyldavis
 pillow
 pyenchant
@@ -17,3 +18,4 @@ tensorflow
 tf-keras
 torch
 transformers
+whatlies
