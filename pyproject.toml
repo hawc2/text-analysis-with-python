@@ -17,6 +17,6 @@ dependencies = [
     "spacy>=3.8.11",
     "statsmodels>=0.14.6",
     "tensorboard>=2.20.0",
-    "torch>=2.10.0",
+    "torch>=2.13.0",
     "transformers>=5.2.0",
 ]
